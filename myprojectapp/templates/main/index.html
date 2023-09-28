@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device, initial-scale=1.0" />
+  <style>
+    *{
+      font-style: normal;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: aquamarine;
+    }
+    a{
+      text-decoration: none;
+    }
+    .container{
+      margin-top: 30px;
+      font-size: 45px;
+      display: flex;
+      width: 100%;
+      height: 60px;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar-brand{
+      width: 40%;
+      margin-left: 0%;
+      text-align: center;
+    }
+    .navbar-tech{
+      width: 60%;
+      margin-right: 0%;
+      text-align: center;
+    }
+    h1{
+      font-size: 50px;
+    }
+    .image{
+      margin-top: 2%;
+      width: 240px;
+      height: 180px;
+      border: 3px solid rgb(102, 76, 37);
+      border-radius: 10px;
+    }
+    .col-md{
+      margin-top: 4%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-control{
+      font-size: 17px;
+      margin-right: -10px;
+      width: 40%;
+      padding: 5px 15px;
+      cursor: pointer;
+      display: block;
+      margin: auto;
+      background:rgba(255, 255, 255, 0.786);
+      border:2px solid black;
+      outline: none;
+    }
+    .submit{
+      margin-left: -10%;
+      font-size: 20px;
+      width: 20%;
+      padding: 8px 15px;
+      cursor: pointer;
+      display: block;
+      margin: auto;
+      background:rgba(63, 118, 180, 0.285);
+      border:2px solid black;
+      outline: none;
+      border-radius: 30px;
+    }
+    .submit:hover{
+      background:rgba(63, 118, 180, 0.6);
+    }
+    h4{
+      font-size: 40px;
+    }
+    h4:hover{
+      font-size: 50px;
+    }
+    .inp{
+      margin-top: -3%;
+      margin-bottom: -3%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media screen and (max-width:700px){
+      h4{
+      font-size: 30px;
+      }
+      h4:hover{
+        font-size: 32px;
+      }
+      .inp{
+        margin-top: -8%;
+        margin-bottom: -8%;
+      }
+      .container{
+        font-size: 24px;
+        font-weight: 5px;
+      }
+      .col-md{
+        margin-top: 13%;
+      }
+    }
+    @media screen and (max-width:500px){
+      h4{
+        font-size: 27px;
+      }
+      h4:hover{
+        font-size: 30px;
+      }
+    }
+  </style>
+  <title>Weather App </title>
+</head>
+<body>
+  <div class="nav">
+    <div class="container">
+      <a href="../" class="navbar-brand">WEATHER APP</a>
+      <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
+    </div>
+  </div>
+  <br>
+  <hr style="color: black;">
+
+  <div id="jumbotron" class="jumbotron" style="text-align: center;margin-top: 4%;">
+    <h1>LIVE WEATHER REPORT</h1>
+    <img src="{% static 'images/weather.png' %}" class="image">
+  </div>
+
+  <nav class="nav">
+    <form method="post" class="col-md"">
+      {% csrf_token %}
+      <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+      <button type="submit" class="submit">Find</button>   
+    <form>
+  </nav>
+  <br>
+  <div class="row" style="text-align: center;">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="cold" ">
+      <h4><span class="badge">Country Code :</span> {{country_code}}</h4>
+      <h4><span class="badge">Coordinates [X,Y] :</span> {{coordinate}}</h4>
+      <h4><span class="badge">Temperature in Celsius :</span> {{temp}}</h4>
+      <h4><span class="badge">Pressure :</span> {{pressure}} </h4>
+      <h4><span class="badge">Humidity : </span> {{humidity}}</h4>
+      <div class="inp">
+        <h4><span class="badge">Forecast : </span> {{main}}</h4>
+        <img style="height: 100px;width: 100px;" src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image"> 
+      </div>
+      <h4><span class="badge">Description : </span> {{description}}</h4>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
