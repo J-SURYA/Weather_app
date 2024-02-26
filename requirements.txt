@@ -2,7 +2,7 @@ asgiref==3.7.2
 blinker==1.7.0
 click==8.1.7
 colorama==0.4.6
-Django==5.0.2
+Django==4.2.9
 et-xmlfile==1.1.0
 Flask==3.0.1
 itsdangerous==2.1.2
